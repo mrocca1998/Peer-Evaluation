@@ -3,5 +3,5 @@ class Student < ApplicationRecord
   has_many :received_evals, class_name: "Evaluation", foreign_key: "recipient"
 
   has_many :memberships
-  has_many :groups, through: memberships
+  has_many :groups, through: :memberships
 end
