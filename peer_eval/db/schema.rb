@@ -10,29 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_052525) do
-
-  create_table "admins", force: :cascade do |t|
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2021_04_16_011919) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "group_id"
     t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "evaluations", force: :cascade do |t|
-    t.integer "score"
-    t.text "comment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "author"
-    t.string "recipient"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -49,8 +33,25 @@ ActiveRecord::Schema.define(version: 2021_04_13_052525) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "type"
-    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment"
+    t.integer "group_id"
+    t.integer "project_id"
+    t.integer "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "rating"
+    t.integer "author_id"
+    t.integer "recipient_id"
+    t.integer "review_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_052525) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "isAdmin"
   end
 
 end
