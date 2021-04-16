@@ -8,20 +8,31 @@ class StudentsController < ApplicationController
 
   # GET /students/1 or /students/1.json
   def show
+    @student = Student.find(params[:id])
+    @groups = @student.groups
   end
 
   # GET /students/new
   def new
     @student = Student.new
+    @groups = Group.all
+    #assuming @user is your User record
   end
 
   # GET /students/1/edit
   def edit
+    @student = Student.find(params[:id])
+    @groups = Group.all
   end
 
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    if params[:student][:group_ids] 
+      params[:student][:group_ids].each { |group_id| 
+        @student.groups << Group.find(group_id)
+      }
+    end
 
     respond_to do |format|
       if @student.save
@@ -36,6 +47,13 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
+    @student.groups = []
+    if params[:student][:group_ids] 
+      params[:student][:group_ids].each { |group_id| 
+        @student.groups << Group.find(group_id)
+      }
+    end
+
     respond_to do |format|
       if @student.update(student_params)
         format.html { redirect_to @student, notice: "Student was successfully updated." }

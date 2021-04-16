@@ -64,6 +64,6 @@ class AssignmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assignment_params
-      params.fetch(:assignment, {})
+      params.require(:assignment).permit(:project_id, :group_id)
     end
 end

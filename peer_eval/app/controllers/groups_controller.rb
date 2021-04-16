@@ -8,6 +8,9 @@ class GroupsController < ApplicationController
 
   # GET /groups/1 or /groups/1.json
   def show
+    @group = Group.find(params[:id])
+    @students = @group.students
+    @projects = @group.projects
   end
 
   # GET /groups/new
@@ -22,6 +25,17 @@ class GroupsController < ApplicationController
   # POST /groups or /groups.json
   def create
     @group = Group.new(group_params)
+    if params[:group][:student_ids] 
+      params[:group][:student_ids].each { |student_id| 
+        @group.students << Student.find(student_id)
+      }
+    end
+
+    if params[:group][:project_ids] 
+      params[:group][:project_ids].each { |project_id| 
+        @group.projects << Project.find(project_id)
+      }
+    end
 
     respond_to do |format|
       if @group.save
@@ -36,6 +50,19 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
+    @group.students = []
+    @group.projects = []
+    if params[:group][:student_ids] 
+      params[:group][:student_ids].each { |student_id| 
+        @group.students << Student.find(student_id)
+      }
+    end
+
+    if params[:group][:project_ids] 
+      params[:group][:project_ids].each { |project_id| 
+        @group.projects << Project.find(project_id)
+      }
+    end
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: "Group was successfully updated." }

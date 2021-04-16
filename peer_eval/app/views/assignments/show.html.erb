@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Project:</strong>
+  <%= @assignment.project_id %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @assignment.group_id %>
+</p>
+
 <%= link_to 'Edit', edit_assignment_path(@assignment) %> |
 <%= link_to 'Back', assignments_path %>

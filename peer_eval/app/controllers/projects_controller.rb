@@ -8,20 +8,30 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
+    @project = Project.find(params[:id])
+    @groups = @project.groups
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    @groups = Group.all
   end
 
   # GET /projects/1/edit
   def edit
+    @project = Project.find(params[:id])
+    @groups = Group.all
   end
 
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)
+    if params[:project][:group_ids] 
+      params[:project][:group_ids].each { |group_id| 
+        @project.groups << Group.find(group_id)
+      }
+    end
 
     respond_to do |format|
       if @project.save
@@ -36,6 +46,12 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    @project.groups = []
+    if params[:project][:group_ids] 
+      params[:project][:group_ids].each { |group_id| 
+        @project.groups << Group.find(group_id)
+      }
+    end
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }

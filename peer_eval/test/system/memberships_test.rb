@@ -14,6 +14,8 @@ class MembershipsTest < ApplicationSystemTestCase
     visit memberships_url
     click_on "New Membership"
 
+    fill_in "Group", with: @membership.group_id
+    fill_in "Student", with: @membership.student_id
     click_on "Create Membership"
 
     assert_text "Membership was successfully created"
@@ -24,6 +26,8 @@ class MembershipsTest < ApplicationSystemTestCase
     visit memberships_url
     click_on "Edit", match: :first
 
+    fill_in "Group", with: @membership.group_id
+    fill_in "Student", with: @membership.student_id
     click_on "Update Membership"
 
     assert_text "Membership was successfully updated"

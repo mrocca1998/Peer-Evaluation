@@ -16,6 +16,20 @@
     <%= form.text_field :name %>
   </div>
 
+  Students <br>
+  <% Student.all.each do |student| %>
+    <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
+    <%= student.fname %> <%= student.lname %>
+    <br />
+  <% end %>
+
+  Projects <br>
+  <% Project.all.each do |project| %>
+    <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
+    <%= project.title %>
+    <br />
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

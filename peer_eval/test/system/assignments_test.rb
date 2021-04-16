@@ -14,6 +14,8 @@ class AssignmentsTest < ApplicationSystemTestCase
     visit assignments_url
     click_on "New Assignment"
 
+    fill_in "Group", with: @assignment.group_id
+    fill_in "Project", with: @assignment.project_id
     click_on "Create Assignment"
 
     assert_text "Assignment was successfully created"
@@ -24,6 +26,8 @@ class AssignmentsTest < ApplicationSystemTestCase
     visit assignments_url
     click_on "Edit", match: :first
 
+    fill_in "Group", with: @assignment.group_id
+    fill_in "Project", with: @assignment.project_id
     click_on "Update Assignment"
 
     assert_text "Assignment was successfully updated"

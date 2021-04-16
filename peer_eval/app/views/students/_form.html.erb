@@ -36,6 +36,12 @@
     <%= form.check_box :isAdmin %>
   </div>
 
+  <% Group.all.each do |group| %>
+    <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
+    <%= group.name %>
+    <br />
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

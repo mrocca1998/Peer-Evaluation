@@ -64,6 +64,6 @@ class MembershipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def membership_params
-      params.fetch(:membership, {})
+      params.require(:membership).permit(:student_id, :group_id)
     end
 end
