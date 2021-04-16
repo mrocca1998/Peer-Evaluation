@@ -11,6 +11,31 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :fname %>
+    <%= form.text_field :fname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lname %>
+    <%= form.text_field :lname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :isAdmin %>
+    <%= form.check_box :isAdmin %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

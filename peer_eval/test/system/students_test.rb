@@ -14,6 +14,11 @@ class StudentsTest < ApplicationSystemTestCase
     visit students_url
     click_on "New Student"
 
+    fill_in "Email", with: @student.email
+    fill_in "Fname", with: @student.fname
+    check "Isadmin" if @student.isAdmin
+    fill_in "Lname", with: @student.lname
+    fill_in "Password", with: @student.password
     click_on "Create Student"
 
     assert_text "Student was successfully created"
@@ -24,6 +29,11 @@ class StudentsTest < ApplicationSystemTestCase
     visit students_url
     click_on "Edit", match: :first
 
+    fill_in "Email", with: @student.email
+    fill_in "Fname", with: @student.fname
+    check "Isadmin" if @student.isAdmin
+    fill_in "Lname", with: @student.lname
+    fill_in "Password", with: @student.password
     click_on "Update Student"
 
     assert_text "Student was successfully updated"

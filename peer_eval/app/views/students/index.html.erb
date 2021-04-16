@@ -5,6 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>Fname</th>
+      <th>Lname</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Isadmin</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +17,11 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
+        <td><%= student.fname %></td>
+        <td><%= student.lname %></td>
+        <td><%= student.email %></td>
+        <td><%= student.password %></td>
+        <td><%= student.isAdmin %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>

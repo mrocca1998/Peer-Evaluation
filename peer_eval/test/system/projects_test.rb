@@ -14,6 +14,7 @@ class ProjectsTest < ApplicationSystemTestCase
     visit projects_url
     click_on "New Project"
 
+    fill_in "Title", with: @project.title
     click_on "Create Project"
 
     assert_text "Project was successfully created"
@@ -24,6 +25,7 @@ class ProjectsTest < ApplicationSystemTestCase
     visit projects_url
     click_on "Edit", match: :first
 
+    fill_in "Title", with: @project.title
     click_on "Update Project"
 
     assert_text "Project was successfully updated"
