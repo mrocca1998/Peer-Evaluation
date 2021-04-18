@@ -1,13 +1,6 @@
 
 <%= stylesheet_link_tag "scores" %>
 
-<%= javascript_pack_tag 'scores', 'data-turbolinks-track': 'reload' %>
-
-<button type="button" class="collapsible">Open Collapsible</button>
-<div class="content">
-  <p>Lorem ipsum...</p>
-</div>
-
 <% @groups.each do |group| %>
   <button type="button" class="collapsible"><%= group.name %></button>
   <div class = "content">
