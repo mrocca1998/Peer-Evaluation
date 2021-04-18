@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PeerEval</title>
+    <title>Peer Evaluation</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <table>
+      <tr class = "header">
+        <%#if current_user.isAdmin %>
+        <th><%= link_to "Students", "/students" %></th>
+        <th><%= link_to "Groups", "/groups" %></th>
+        <th><%= link_to "Projects", "/projects" %></th>
+        <%#else%>
+        <%#end%>
+      </tr>
+    </table>
     <%= yield %>
   </body>
 </html>
+
+
