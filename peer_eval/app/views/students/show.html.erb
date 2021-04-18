@@ -1,34 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Fname:</strong>
-  <%= @student.fname %>
-</p>
+<h2><%= @student.fname %> <%= @student.lname %></h2>
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Admin</th>
+  </tr>
+  <tr>
+    <td><%= @student.email %></td>
+    <td><%= @student.isAdmin %></td>
+  </tr>
+</table>
+<br>
 
-<p>
-  <strong>Lname:</strong>
-  <%= @student.lname %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @student.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @student.password %>
-</p>
-
-<p>
-  <strong>Isadmin:</strong>
-  <%= @student.isAdmin %>
-</p>
-
-<% @groups.each do |group| %>
-  <div>
-    <%= group.name %> <br>
-  </div>
+<% if @groups.length > 0 %>
+  <h3>Group Memberships</h3>
+  <% @groups.sort_by(&:name).each do |group| %>
+    <div>
+      <%= group.name %> <br>
+    </div>
+  <% end %>
+  <br>
+<% else %>
+  <h3><%= @student.fname %> <%= @student.lname %> Is Not Currently a Member of Any Groups</h3>
 <% end %>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |

@@ -12,35 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :fname %>
+    <%= form.label :First %>
     <%= form.text_field :fname %>
   </div>
 
   <div class="field">
-    <%= form.label :lname %>
+    <%= form.label :Last %>
     <%= form.text_field :lname %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.label :Email %>
     <%= form.text_field :email %>
   </div>
 
   <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :isAdmin %>
+    <%= form.label :Admin %>
     <%= form.check_box :isAdmin %>
   </div>
 
-  <h3>Group Memberships</h3>
-  <% Group.all.each do |group| %>
-    <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
-    <%= group.name %>
-    <br />
+  <% if Group.all.length > 0 %>
+    <h3>Group Memberships</h3>
+    <% Group.all.sort_by(&:name).each do |group| %>
+      <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
+      <%= group.name %>
+      <br />
+    <% end %>
   <% end %>
 
 

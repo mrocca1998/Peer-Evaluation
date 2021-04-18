@@ -1,22 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+<h2><%= @group.name %></h2>
 
-Students <br>
-<% @students.each do |student| %>
-  <div>
-    <%= student.fname %> <%= student.lname %> <br>
-  </div>
+<% if @students.length > 0 %>
+	<h3>Group Members</h3>	
+	<% @students.each do |student| %>
+	  <div>
+	    <%= student.fname %> <%= student.lname %> <br>
+	  </div>
+	<% end %>
+	<br>
+<% else %>
+  <h3>This Group Currently has No Members</h3>
 <% end %>
 
-Projects <br>
-<% @projects.each do |project| %>
-  <div>
-    <%= project.title %> <br>
-  </div>
+<% if @projects.length > 0 %>
+	<h3>Projects Assigned</h3>
+	<% @projects.each do |project| %>
+	  <div>
+	    <%= project.title %> <br>
+	  </div>
+	<% end %>
+	<br>
+<% else %>
+  	<h3>This Group is not Currently Assigned to Any Projects</h3>
 <% end %>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |

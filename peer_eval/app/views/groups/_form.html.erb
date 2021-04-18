@@ -16,18 +16,23 @@
     <%= form.text_field :name %>
   </div>
 
-  <h3>Group Members</h3>
-  <% Student.all.each do |student| %>
-    <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
-    <%= student.fname %> <%= student.lname %>
-    <br />
+  <% if Student.all.length > 0 %>
+    <h3>Group Members</h3>
+    <% Student.all.sort_by(&:lname).each do |student| %>
+      <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
+      <%= student.fname %> <%= student.lname %>
+      <br>
+    <% end %>
   <% end %>
 
-  <h3>Assignments</h3>
-  <% Project.all.each do |project| %>
-    <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
-    <%= project.title %>
-    <br />
+  <% if Project.all.length > 0 %>
+    <h3>Assignments</h3>
+    <% Project.all.sort_by(&:title).each do |project| %>
+      <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
+      <%= project.title %>
+      <br />
+    <% end %>
+    <br>
   <% end %>
 
   <div class="actions">

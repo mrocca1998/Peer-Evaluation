@@ -1,14 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
+<h2><%= @project.title %></h2>
 
-<% @groups.each do |group| %>
-  <div>
-    <%= group.name %> <br>
-  </div>
+<% if @groups.length > 0 %>
+	<h3>Groups Assigned</h3>
+	<% @groups.sort_by(&:name).each do |group| %>
+	  <div>
+	    <%= group.name %> <br>
+	  </div>
+	<% end %>
+	<br>
+<% else %>
+	<h3>No Groups Are Currently Assigned To this Project</h3>
 <% end %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
-    @students = Student.all
+    @students = Student.all.sort_by(&:lname)
   end
 
   # GET /students/1 or /students/1.json
@@ -28,6 +28,7 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @student.password = "default"
     if params[:student][:group_ids] 
       params[:student][:group_ids].each { |group_id| 
         @student.groups << Group.find(group_id)
