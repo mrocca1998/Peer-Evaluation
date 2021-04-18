@@ -4,6 +4,9 @@ class ScoresController < ApplicationController
   # GET /scores or /scores.json
   def index
     @scores = Score.all
+    @students = Student.all
+    @groups = Group.all
+    @projects = Project.all
   end
 
   # GET /scores/1 or /scores/1.json
