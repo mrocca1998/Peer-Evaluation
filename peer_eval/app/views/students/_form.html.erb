@@ -32,12 +32,13 @@
   </div>
 
   <% if Group.all.length > 0 %>
-    <h3>Group Memberships</h3>
+    <h3>Group Membership(s)</h3>
     <% Group.all.sort_by(&:name).each do |group| %>
       <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
       <%= group.name %>
-      <br />
+      <br>
     <% end %>
+    <br>
   <% end %>
 
 

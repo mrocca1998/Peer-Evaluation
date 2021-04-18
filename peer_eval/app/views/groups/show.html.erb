@@ -3,7 +3,7 @@
 <h2><%= @group.name %></h2>
 
 <% if @students.length > 0 %>
-	<h3>Group Members</h3>	
+	<h3>Group Member(s)</h3>	
 	<% @students.each do |student| %>
 	  <div>
 	    <%= student.fname %> <%= student.lname %> <br>
@@ -15,7 +15,7 @@
 <% end %>
 
 <% if @projects.length > 0 %>
-	<h3>Projects Assigned</h3>
+	<h3>Project(s) Assigned</h3>
 	<% @projects.each do |project| %>
 	  <div>
 	    <%= project.title %> <br>
