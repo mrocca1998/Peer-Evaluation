@@ -16,14 +16,14 @@
     <%= form.text_field :name %>
   </div>
 
-  Students <br>
+  <h3>Group Members</h3>
   <% Student.all.each do |student| %>
     <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
     <%= student.fname %> <%= student.lname %>
     <br />
   <% end %>
 
-  Projects <br>
+  <h3>Assignments</h3>
   <% Project.all.each do |project| %>
     <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
     <%= project.title %>
