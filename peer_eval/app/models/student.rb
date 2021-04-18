@@ -7,4 +7,5 @@ class Student < ApplicationRecord
   has_many :reviews
   validates :fname, :lname, :email, presence: true
   validates :groups, absence: { message: 'cannot have admins as members' }, if: :isAdmin?
+  validates_uniqueness_of :email
 end
