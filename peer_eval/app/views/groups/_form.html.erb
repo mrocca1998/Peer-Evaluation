@@ -1,6 +1,6 @@
 <%= form_with(model: group, local: true) do |form| %>
   <% if group.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class = "error">
       <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
 
       <ul>
@@ -16,24 +16,28 @@
     <%= form.text_field :name %>
   </div>
 
-  <% if Student.all.length > 0 %>
-    <h3>Group Members</h3>
-    <% Student.all.sort_by(&:lname).each do |student| %>
-      <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
-      <%= student.fname %> <%= student.lname %>
+  <div class = "checks">
+    <% if Student.all.length > 0 %>
+      <h3 id = "title">Group Members</h3>
+      <% Student.all.select {|student| !student.isAdmin }.sort_by(&:lname).each do |student| %>
+        <%= check_box_tag "group[student_ids][]", student.id, @group.students.include?(student) %>
+        <%= student.fname %> <%= student.lname %> <%= student.email %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class = "checks">
+    <% if Project.all.length > 0 %>
+      <h3 id = "title">Assignments</h3>
+      <% Project.all.sort_by(&:title).each do |project| %>
+        <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
+        <%= project.title %>
+        <br />
+      <% end %>
       <br>
     <% end %>
-  <% end %>
-
-  <% if Project.all.length > 0 %>
-    <h3>Assignments</h3>
-    <% Project.all.sort_by(&:title).each do |project| %>
-      <%= check_box_tag "group[project_ids][]", project.id, @group.projects.include?(project) %>
-      <%= project.title %>
-      <br />
-    <% end %>
-    <br>
-  <% end %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

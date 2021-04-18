@@ -31,15 +31,20 @@
     <%= form.check_box :isAdmin %>
   </div>
 
-  <% if Group.all.length > 0 %>
-    <h3>Group Membership(s)</h3>
-    <% Group.all.sort_by(&:name).each do |group| %>
-      <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
-      <%= group.name %>
+  <div class = "checks">
+    <% if Group.all.length > 0 %>
+
+      <h3 id = "title">Group Membership(s)</h3>
+
+        <% Group.all.sort_by(&:name).each do |group| %>
+          <%= check_box_tag "student[group_ids][]", group.id, @student.groups.include?(group) %>
+          <%= group.name %>
+          <br>
+
+      <% end %>
       <br>
     <% end %>
-    <br>
-  <% end %>
+  </div>
 
 
   <div class="actions">

@@ -6,7 +6,7 @@
 	<h3>Group Member(s)</h3>	
 	<% @students.each do |student| %>
 	  <div>
-	    <%= student.fname %> <%= student.lname %> <br>
+	    <%= student.fname %> <%= student.lname %> <%= student.email %> <br>
 	  </div>
 	<% end %>
 	<br>
