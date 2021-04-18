@@ -6,7 +6,7 @@
   <div class = "content">
     <% @projects.each do |project| %>
       <% if Assignment.exists?(group_id: group.id, project_id: project.id) %>
-        <button type="button" class = "collapsible"><%= project.title %></button>
+        <button type="button" class = "collapsible scarlet"><%= project.title %></button>
         <div class = "content">
           <%members = Membership.where(group_id: group.id) %>
           <%members.each do |member| %>
