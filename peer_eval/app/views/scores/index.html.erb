@@ -1,33 +1,90 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Scores</h1>
+<%= stylesheet_link_tag "scores" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rating</th>
-      <th>Author</th>
-      <th>Recipient</th>
-      <th>Review</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @groups.each do |group| %>
+  <button type="button" class="collapsible"><%= group.name %></button>
+  <div class = "content">
+    <% @projects.each do |project| %>
+      <% if Assignment.exists?(group_id: group.id, project_id: project.id) %>
+        <button type="button" class = "collapsible scarlet"><%= project.title %></button>
+        <div class = "content">
+          <%members = Membership.where(group_id: group.id) %>
+          <%members.each do |member| %>
+            <% student = Student.find_by(id: member.student_id)
+               review = Review.find_by(student_id: student.id, project_id: project.id)%>
+            <button type="button" class = "collapsible"><%="#{student.fname} #{student.lname}" %></button>
+            <% if(review != nil) %>
+              <div class = "content">
+                  <p>Average rating by group: <%=average_score(project.id, student.id) %>
+                  <% scores= Score.where(review_id: review.id) %>
+                  <%scores.each do |score| %>
+                  <br><%="#{Student.find_by(id: score.recipient_id).fname} #{Student.find_by(id: score.recipient_id).lname}: #{score.rating} " %>
+                  <% end %>
+                   <br> <%="Comment: #{review.comment}" %>
+                  </p>
+              </div>
+            <% else %>
+              <div class="content" >
+                <p> Average rating by group: <%=average_score(project.id, student.id) %>
+                  <br> No review submitted.</p>
+              </div >
+            <%end %>
+          <% end %>
+        </div>
+      <% end %>
+    <%end %>
+  </div>
+<% end %>
 
-  <tbody>
-    <% @scores.each do |score| %>
-      <tr>
-        <td><%= score.rating %></td>
-        <td><%= score.author %></td>
-        <td><%= score.recipient %></td>
-        <td><%= score.review_id %></td>
-        <td><%= link_to 'Show', score %></td>
-        <td><%= link_to 'Edit', edit_score_path(score) %></td>
-        <td><%= link_to 'Destroy', score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+<script>
+    let coll = document.getElementsByClassName("collapsible");
+let i;
 
-<%= link_to 'New Score', new_score_path %>
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        let content = this.nextElementSibling;
+        if (content.className == "content"){
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    });
+}
+</script>
+<!--<p id="notice"><%#= notice %></p>-->
+
+<!--<h1>Scores</h1>-->
+
+<!--<table>-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th>Rating</th>-->
+<!--      <th>Author</th>-->
+<!--      <th>Recipient</th>-->
+<!--      <th>Review</th>-->
+<!--      <th colspan="3"></th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+
+<!--  <tbody>-->
+    <%# @scores.each do |score| %>
+<!--      <tr>-->
+<!--        <td><%#= score.rating %></td>-->
+<!--        <td><%#= score.author %></td>-->
+<!--        <td><%#= score.recipient %></td>-->
+<!--        <td><%#= score.review_id %></td>-->
+<!--        <td><%#= link_to 'Show', score %></td>-->
+<!--        <td><%#= link_to 'Edit', edit_score_path(score) %></td>-->
+<!--        <td><%#= link_to 'Destroy', score, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+<!--      </tr>-->
+    <%# end %>
+<!--  </tbody>-->
+<!--</table>-->
+
+<!--<br>-->
+
+<%#= link_to 'New Score', new_score_path %>
