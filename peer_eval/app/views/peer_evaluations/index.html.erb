@@ -1,0 +1,76 @@
+<%= stylesheet_link_tag "application" %>
+
+<h1>Peer Evaluations</h1>
+
+<% user = current_student%>
+<% @memberships.each do |membership|%>
+  <% if membership.student_id == user.id %>
+    <% @groups.each do |group|%>
+      <% if group.id == membership.group_id%>
+        <button type="button" class="collapsible"><%= group.name %></button>
+        <div class = "content">
+          <% @assignments.each do |assignment|%>
+            <% if assignment.group_id == group.id%>
+              <% @projects.each do |project|%>
+                <% if project.id == assignment.project_id%>
+                  <button type="button" class="collapsible"><%= project.title %></button>
+                  <div class = "content">
+                    <form>
+                      <%count = 1%>
+                      <% @memberships.each do |membership|%>
+                        <%identifier = "f#{count}"%>
+                        <% if membership.group_id == group.id%>
+                          <% student = Student.find_by(id: membership.student_id)%>
+                          <div class="evals">
+                            <p style="display: inline-block width: 100%"><%=student.fname%> <%=student.lname%></p>
+                            <%= form_for @score do |identifier| %>
+                              <%= identifier.text_field :rating %>
+                              <%= identifier.text_field :author_id %>
+                              <%= identifier.text_field :recipient_id %>
+                              <%= identifier.text_field :review_id %>
+                              <%= identifier.submit %>
+                            <% end %>
+                            <%count+=1%>
+                          </div>
+                        <%end%>
+                      <%end%>
+                      <%= form_for @review do |f| %>
+                        <%= f.label "Comments: " %>
+                        <%= f.text_area :comment, size: "150x10" %>
+                        <%= f.text_field :group_id %>
+                        <%= f.text_field :project_id %>
+                        <%= f.text_field :student_id %>
+                        <%= f.submit %>
+                      <% end %>
+                    </form>
+                  </div>
+                <%end%>
+              <%end%>
+            <%end%>
+          <%end%>
+        </div>
+      <%end%>
+    <%end%>
+  <%end%>
+<%end%>
+
+<script>
+  let coll = document.getElementsByClassName("collapsible");
+  let i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      let content = this.nextElementSibling;
+      if (content.className == "content"){
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+          }
+      }
+  });
+}
+
+</script>
+
