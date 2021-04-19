@@ -18,7 +18,7 @@ The groups page lists all current groups. Any group can be selected to see detai
 
 Lastly, the projecs page lists all current projects. Any project can be selected to show the groups currently assigned to the project. The new project and edit project pages provide a checklist of all groups that are/can be assigned to the project.
 
-3.
+3. The scores page available to admins has collapsible sections for each group, each project per group, and each student per project. For each student it displays the students peer review for the project including comments and scores for other students, as well their average score given by everyone in the group.
 
 4. The authentication part of our project was accomplished by using the devise gem. Through using this gem and integrating it with the student table we had designed, we are able to prompt the user to signup with their name, email and password. After this account creation, the changes are saved and another individual cannot reuse an email thats already in use and the password is stored to allow for future logins. Without a valid email and corresponding password, an individual cannot login. 
 
