@@ -5,7 +5,7 @@
 2. Enter command 'bundle install' to in stall all dependencies
 3. Enter commands 'rake db:create' and 'rake db:migrate' to create the database and run all existing migrations
 4. Enter 'rails s' to start the rails server. It will run on localhost port 3000.
-5. Go to localhost:3000/ and hit sign up to create an account. Then log in and you will be directed to a landing page based on whether you are an admin or student
+5. Go to localhost:3000/students/sign_up and hit sign up to create an account. Then log in and you will be directed to a landing page based on whether you are an admin or student
 
 #Requirements
 1.
@@ -20,7 +20,7 @@ Lastly, the projecs page lists all current projects. Any project can be selected
 
 3.
 
-4.
+4. The authentication part of our project was accomplished by using the devise gem. Through using this gem and integrating it with the student table we had designed, we are able to prompt the user to signup with their name, email and password. After this account creation, the changes are saved and another individual cannot reuse an email thats already in use and the password is stored to allow for future logins. Without a valid email and corresponding password, an individual cannot login. 
 
 
 #Extensions
