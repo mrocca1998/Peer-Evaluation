@@ -3,6 +3,7 @@ module ScoresHelper
     sum = 0.0
     count = 0.0
     scores = Score.where(recipient_id: user)
+    puts scores.length
     scores.each do |score|
       if (Review.find_by(id: score.review_id).project_id == project)
         sum += score.rating

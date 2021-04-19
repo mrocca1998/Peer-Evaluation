@@ -6,6 +6,7 @@
 <% @memberships.each do |membership|%>
   <% if membership.student_id == user.id %>
     <% @groups.each do |group|%>
+      <%puts "test #{group.id}" %>
       <% if group.id == membership.group_id%>
         <button type="button" class="collapsible"><%= group.name %></button>
         <div class = "content">
@@ -15,34 +16,32 @@
                 <% if project.id == assignment.project_id%>
                   <button type="button" class="collapsible"><%= project.title %></button>
                   <div class = "content">
-                    <form>
-                      <%count = 1%>
-                      <% @memberships.each do |membership|%>
-                        <%identifier = "f#{count}"%>
-                        <% if membership.group_id == group.id%>
-                          <% student = Student.find_by(id: membership.student_id)%>
-                          <div class="evals">
-                            <p style="display: inline-block width: 100%"><%=student.fname%> <%=student.lname%></p>
-                            <%= form_for @score do |identifier| %>
-                              <%= identifier.text_field :rating %>
-                              <%= identifier.text_field :author_id %>
-                              <%= identifier.text_field :recipient_id %>
-                              <%= identifier.text_field :review_id %>
-                              <%= identifier.submit %>
-                            <% end %>
-                            <%count+=1%>
+                    <% review =  Review.find_by(project_id: project.id, student_id: user.id) %>
+                    <% if review == nil %>
+                        <%= form_for setup_review(@review, user, group) do |f| %>
+                          <div>
+                              <%= f.fields_for :scores do |ff| %>
+                                <% student = Student.find_by(id: ff.object.recipient_id)%>
+                                <%= ff.label "#{student.fname} #{student.lname}"%>
+                                <%= ff.text_field :rating %>
+                                <%= ff.hidden_field :author_id, value: user.id %>
+                                <%= ff.hidden_field :recipient_id, value: student.id %>
+                              <% end %>
                           </div>
-                        <%end%>
-                      <%end%>
-                      <%= form_for @review do |f| %>
-                        <%= f.label "Comments: " %>
-                        <%= f.text_area :comment, size: "150x10" %>
-                        <%= f.text_field :group_id %>
-                        <%= f.text_field :project_id %>
-                        <%= f.text_field :student_id %>
-                        <%= f.submit %>
+                          <%= f.label "Comments: " %>
+                          <%= f.text_area :comment, size: "150x10" %>
+                          <%= f.hidden_field :group_id, value: group.id %>
+                          <%= f.hidden_field :project_id, value: project.id %>
+                          <%= f.hidden_field :student_id, value: user.id %>
+                          <%= f.submit data: { disable_with: false }%>
+                        <% end %>
+                      <% else %>
+                        <% review.scores.each do |score| %>
+                        <% student = Student.find_by(id: score.recipient_id)%>
+                        <b><%= "#{student.fname} #{student.lname}: " %></b><%= score.rating %> <br>
                       <% end %>
-                    </form>
+                        Comment: <%= review.comment %>
+                      <% end %>
                   </div>
                 <%end%>
               <%end%>
