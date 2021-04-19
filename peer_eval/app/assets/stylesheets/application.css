@@ -43,6 +43,20 @@ label .inline {
 	margin-top: 30px;
 }
 
+input[class="rating"] {
+  width: 20px;
+}
+
+input[id="comment"]{
+  width:80%;
+  height: 80px;
+  padding-left: 10%;
+}
+
+#evals{
+  align: left;
+  padding-left: 45%;
+}
 
 input[type=submit] {
   width: 25%;
