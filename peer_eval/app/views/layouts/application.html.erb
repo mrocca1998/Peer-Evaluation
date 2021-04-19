@@ -22,13 +22,13 @@
   </p>
     <table>
       <tr class = "header">
-        <%#if current_user.isAdmin %>
+        <% if current_student.try(:isAdmin?) %>
         <th><%= link_to "Students", "/students" %></th>
         <th><%= link_to "Groups", "/groups" %></th>
         <th><%= link_to "Projects", "/projects" %></th>
         <th><%= link_to "Scores", "/scores" %></th>
         <%#else%>
-        <%#end%>
+        <%end%>
       </tr>
     </table>
     <% if notice %>

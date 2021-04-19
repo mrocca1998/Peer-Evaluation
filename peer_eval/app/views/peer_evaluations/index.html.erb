@@ -55,22 +55,24 @@
 <%end%>
 
 <script>
-  let coll = document.getElementsByClassName("collapsible");
-  let i;
+  let ready = function() {
+      let coll = document.getElementsByClassName("collapsible");
+      let i;
 
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      let content = this.nextElementSibling;
-      if (content.className == "content"){
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
-          }
+      for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function () {
+              this.classList.toggle("active");
+              let content = this.nextElementSibling;
+              if (content.className == "content") {
+                  if (content.style.display === "block") {
+                      content.style.display = "none";
+                  } else {
+                      content.style.display = "block";
+                  }
+              }
+          });
       }
-  });
-}
-
+  }
+  $(document).on('turbolinks:load', ready);
 </script>
 
