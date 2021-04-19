@@ -8,7 +8,7 @@
 5. Go to localhost:3000/students/sign_up and hit sign up to create an account. Then log in and you will be directed to a landing page based on whether you are an admin or student
 
 #Requirements
-1.
+1. A user is able to submit scores for eaach of their teammates and one comment per project. When the student logs in, they will be redirected to a page that lists all the groups they are in. When the student clicks on a group, it will display all the projects for that group. If they click on a project, a form will appear where they can give each teammate a score, and leave any overall comments.
 
 2. The admin has three pages linked in the admin header, students, groups, and projects, that they can use to populate the class, form groups, and assign projects to group. As mentioned in the extension below, we implemented many-to-many relationships between students-to-groups and groups-to-projects.
 
