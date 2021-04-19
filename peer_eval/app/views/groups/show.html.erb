@@ -5,8 +5,8 @@
 <% if @students.length > 0 %>
 	<h3>Group Member(s)</h3>	
 	<% @students.each do |student| %>
-	  <div>
-	    <%= student.fname %> <%= student.lname %> <%= student.email %> <br>
+	  <div class = "checks">
+	    <li><%= student.fname %> <%= student.lname %> <%= student.email %> <br></li>
 	  </div>
 	<% end %>
 	<br>
@@ -17,8 +17,8 @@
 <% if @projects.length > 0 %>
 	<h3>Project(s) Assigned</h3>
 	<% @projects.each do |project| %>
-	  <div>
-	    <%= project.title %> <br>
+	  <div class = "checks">
+	    <li><%= project.title %> <br></li>
 	  </div>
 	<% end %>
 	<br>

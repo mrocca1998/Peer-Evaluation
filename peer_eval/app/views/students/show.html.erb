@@ -16,8 +16,8 @@
 <% if @groups.length > 0 %>
   <h3>Group Membership(s)</h3>
   <% @groups.sort_by(&:name).each do |group| %>
-    <div>
-      <%= group.name %> <br>
+    <div class = "checks">
+      <li><%= group.name %> <br></li>
     </div>
   <% end %>
   <br>
