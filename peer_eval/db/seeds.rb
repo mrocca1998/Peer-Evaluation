@@ -9,8 +9,8 @@ Group.create([{ id: 1, name: 'Group1' }, { id: 2, name: 'Group2' }])
 
 Project.create([{ id: 1, title: 'Group 1 Project' }, { id: 2, title: 'Group 2 Project' }, {id: 3, title: "Group 1+2 Project"}])
 
-Student.create([{id: 1, fname: "Group1", lname: "A" }, {id: 2, fname: "Group1", lname: "B"}, {id: 3, fname: "Group2", lname: "A"},
-                {id: 4, fname: "Group2", lname: "B" }])
+Student.create([{id: 1, fname: "Group1", lname: "A", email: "example1@example.com", password: "123456" }, {id: 2, fname: "Group1", lname: "B", email: "example2@example.com", password: "123456"}, {id: 3, fname: "Group2", lname: "A", email: "example3@example.com", password: "123456"},
+                {id: 4, fname: "Group2", lname: "B", email: "example4@example.com", password: "123456" }])
 
 Membership.create([{ student_id: 1, group_id: 1 }, { student_id: 2, group_id: 1}, { student_id: 3, group_id: 2}, { student_id: 4, group_id: 2}])
 
