@@ -9,6 +9,7 @@ class PeerEvaluationsController < ApplicationController
     @projects = Project.all
     @reviews = Review.all
     @scores = Score.all
+    params.permit!
     @review = Review.new(params[:review])
     @score = Score.new(params[:score])
 
