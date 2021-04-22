@@ -22,7 +22,7 @@
                           <div>
                               <%= f.fields_for :scores do |ff| %>
                                 <% student = Student.find_by(id: ff.object.recipient_id)%>
-                                <%= ff.label "#{student.fname} #{student.lname}"%>
+                                <%= ff.label "#{student.fname} #{student.lname}'s score:"%>
                                 <%= ff.text_field :rating %>
                                 <%= ff.hidden_field :author_id, value: user.id %>
                                 <%= ff.hidden_field :recipient_id, value: student.id %>
@@ -38,7 +38,7 @@
                       <% else %>
                         <% review.scores.each do |score| %>
                         <% student = Student.find_by(id: score.recipient_id)%>
-                        <b><%= "#{student.fname} #{student.lname}: " %></b><%= score.rating %> <br>
+                        <b><%= "#{student.fname} #{student.lname}'s score: " %></b><%= score.rating %> <br>
                       <% end %>
                         Comment: <%= review.comment %>
                       <% end %>
