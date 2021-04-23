@@ -37,9 +37,9 @@
                         <% end %>
                       <% else %>
                         <% review.scores.each do |score| %>
-                        <% student = Student.find_by(id: score.recipient_id)%>
-                        <b><%= "#{student.fname} #{student.lname}: " %></b><%= score.rating %> <br>
-                      <% end %>
+                          <% student = Student.find_by(id: score.recipient_id)%>
+                          <b><%= "#{student.fname} #{student.lname}: " %></b><%= score.rating %> <br>
+                        <% end %>
                         Comment: <%= review.comment %>
                       <% end %>
                   </div>

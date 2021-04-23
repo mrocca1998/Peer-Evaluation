@@ -28,6 +28,7 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @student.count = 0
     @student.password = "default"
     if params[:student][:group_ids] 
       params[:student][:group_ids].each { |group_id| 
@@ -37,19 +38,23 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: "Student was successfully created." }
-        format.json { render :show, status: :created, location: @student }
+        @students = Student.all
+        format.html { render action: "index", notice: "Student was successfully created." }
+        format.json { render :index, status: :created}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
+    end
+    if @student.isAdmin
+      @student.groups = []
     end
   end
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
     @student.groups = []
-    if params[:student][:group_ids] 
+    if params[:student][:group_ids]
       params[:student][:group_ids].each { |group_id| 
         @student.groups << Group.find(group_id)
       }
@@ -57,12 +62,17 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: "Student was successfully updated." }
-        format.json { render :show, status: :ok, location: @student }
+        @students = Student.all
+        format.html { render action: "index", notice: "Student was successfully updated." }
+        format.json { render action: "index", status: :ok }
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
+    end
+    if @student.isAdmin
+      @student.groups = []
     end
   end
 
@@ -70,7 +80,7 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
+      format.html { redirect_to students_url, notice: "Student was successfully deleted." }
       format.json { head :no_content }
     end
   end

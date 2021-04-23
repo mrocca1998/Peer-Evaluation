@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :students, path: 'u'
+	get 'reviews/:id', to: 'peer_evaluations#index'
+ 	devise_for :students, path: 'u'
 	resources :students
 	resources :groups
 	resources :projects
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
 	resources :scores
 	resources :reviews
 	resources :peer_evaluations
+
 	root to: 'students#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

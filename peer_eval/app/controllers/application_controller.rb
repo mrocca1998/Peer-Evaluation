@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_student!
 
+  #before_action :authorize, :except => [:new, :create]
+
+
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -15,7 +18,11 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    if current_student.try(:isAdmin?)
+    current_student.count = current_student.count + 1
+    current_student.save
+    if current_student.count == 1
+      edit_student_registration_path(current_student)
+    elsif current_student.try(:isAdmin?)
       return "/students"
     else
       return "/peer_evaluations"
