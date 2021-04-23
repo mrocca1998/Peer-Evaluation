@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 2021_04_23_031827) do
   end
 
   create_table "projects", force: :cascade do |t|
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
     t.datetime "due", precision: 6
   end
 
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_031827) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "count", default: 0
+    t.integer "count", default: 1
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
