@@ -5,6 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Student.create(fname: "John", lname: "Deus", email: "god@gmail.com", isAdmin: true, password: "secret", count: 1)
+
+=begin
 Group.create([{ id: 1, name: 'Group1' }, { id: 2, name: 'Group2' }])
 
 Project.create([{ id: 1, title: 'Group 1 Project' }, { id: 2, title: 'Group 2 Project' }, {id: 3, title: "Group 1+2 Project"}])
@@ -39,3 +43,4 @@ Score.create([{id: 1, review_id: 1, author_id: 1, recipient_id: 1, rating: 5},
               {id: 13, review_id: 7, author_id: 3, recipient_id: 3, rating: 5},
               {id: 14, review_id: 7, author_id: 3, recipient_id: 4, rating: 1}
              ])
+=end

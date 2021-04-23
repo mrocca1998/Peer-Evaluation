@@ -65,7 +65,6 @@ class StudentsController < ApplicationController
         @students = Student.all
         format.html { render action: "index", notice: "Student was successfully updated." }
         format.json { render action: "index", status: :ok }
-
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
@@ -73,6 +72,7 @@ class StudentsController < ApplicationController
     end
     if @student.isAdmin
       @student.groups = []
+      @student.save
     end
   end
 
