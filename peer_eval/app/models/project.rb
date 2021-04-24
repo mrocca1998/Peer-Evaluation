@@ -8,6 +8,8 @@ class Project < ApplicationRecord
   validate :due_date_must_be_in_the_future
 
   def due_date_must_be_in_the_future
-    errors.add(:due, "must be in the future") if due < DateTime.current
+  	if due.present? && due < Date.today
+      errors.add(:due, "must be in the future")
+    end
   end
 end

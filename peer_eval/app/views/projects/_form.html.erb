@@ -15,6 +15,10 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+    <div class="field">
+    <%= form.label "Due Date" %>
+    <%= form.date_field :due %>
+  </div>
 
   <div class = "checks">
     <% if Group.all.length > 0 %>

@@ -16,8 +16,9 @@
                 <% if project.id == assignment.project_id%>
                   <button type="button" class="collapsible"><%= project.title %></button>
                   <div class = "content">
+                    <div>Due Date: <%= project.due.to_date.strftime("%D") %></div>
                     <% review =  Review.find_by(project_id: project.id, student_id: user.id) %>
-                    <% if review == nil %>
+                    <% if review == nil && (project.due.to_date <= Date.today)%>
                         <%= form_for setup_review(@review, user, group) do |f| %>
                           <div>
                               <%= f.fields_for :scores do |ff| %>
@@ -35,12 +36,18 @@
                           <%= f.hidden_field :student_id, value: user.id %>
                           <%= f.submit data: { disable_with: false }%>
                         <% end %>
-                      <% else %>
+                    <% elsif review != nil%>
                         <% review.scores.each do |score| %>
                         <% student = Student.find_by(id: score.recipient_id)%>
                         <b><%= "#{student.fname} #{student.lname}'s score: " %></b><%= score.rating %> <br>
                       <% end %>
                         Comment: <%= review.comment %>
+                    <% else%>
+                        <b><%=project.due.to_date%></b>
+                        <b><%=Date.today%></b>
+                        <b style="color:red;">Peer Review Overdue</b>
+                        <br>
+                        <i>No Review Submitted</i>
                       <% end %>
                   </div>
                 <%end%>
