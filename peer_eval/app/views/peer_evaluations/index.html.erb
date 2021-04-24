@@ -19,7 +19,7 @@
                     <div>Due Date: <%= project.due.to_date.strftime("%D") %></div>
                     <% review =  Review.find_by(project_id: project.id, student_id: user.id) %>
                     <% if review == nil && (project.due.to_date >= Date.today)%>
-                        <%= form_for setup_review(@review, user, group) do |f| %>
+                        <%= form_for setup_review(user, group) do |f| %>
                           <div>
                               <%= f.fields_for :scores do |ff| %>
                                 <% student = Student.find_by(id: ff.object.recipient_id)%>
