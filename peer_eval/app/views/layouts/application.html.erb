@@ -10,27 +10,28 @@
   </head>
 
   <body>
-  <p class="navbar-text float-right">
-    <% if student_signed_in? %>
-      Logged in as <strong><%= current_student.email %></strong>.
-      <%= link_to 'Edit profile', edit_student_registration_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_student_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% else %>
-      <%= link_to "Sign up", new_student_registration_path, :class => 'navbar-link'  %> |
-      <%= link_to "Login", new_student_session_path, :class => 'navbar-link'  %>
-    <% end %>
-  </p>
     <table>
-      <tr class = "header">
+      <tr style="padding-bottom:15px" class = "header">
         <% if current_student.try(:isAdmin?) %>
-        <th><%= link_to "Students", "/students" %></th>
-        <th><%= link_to "Groups", "/groups" %></th>
-        <th><%= link_to "Projects", "/projects" %></th>
-        <th><%= link_to "Scores", "/scores" %></th>
+        <th class="th1"><%= link_to "Students", "/students" %></th>
+        <th class="th2"><%= link_to "Groups", "/groups" %></th>
+        <th class="th3"><%= link_to "Projects", "/projects" %></th>
+        <th class="th4"><%= link_to "Scores", "/scores" %></th>
         <%#else%>
         <%end%>
       </tr>
     </table>
+    <p class="navbar">
+      <% if student_signed_in? %>
+        Logged in as <strong><%= current_student.email %></strong>.
+        <%= link_to 'Edit profile', edit_student_registration_path, :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_student_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+        <%= link_to "Sign up", new_student_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_student_session_path, :class => 'navbar-link'  %>
+      <% end %>
+    </p>
+    
     <%# if notice %>
 <!--    <p class="alert alert-success"><%#= notice %></p>-->
     <%# if notice %>
