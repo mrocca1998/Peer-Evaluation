@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_163627) do
+ActiveRecord::Schema.define(version: 2021_04_25_021933) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer "group_id"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.float "projectGrade"
+    t.integer "student_id"
     t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,9 +41,9 @@ ActiveRecord::Schema.define(version: 2021_04_23_163627) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
     t.datetime "due", precision: 6
   end
 

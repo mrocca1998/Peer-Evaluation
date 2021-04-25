@@ -2,6 +2,8 @@ class Project < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :groups, through: :assignments
   has_many :reviews
+  has_many :grades
+
   validates :title, presence: true, uniqueness: true
 
   validates :due, presence: true
