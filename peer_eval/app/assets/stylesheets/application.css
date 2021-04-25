@@ -68,7 +68,16 @@ input[id="comment"]{
   padding-left: 45%;
 }
 
-input[type=submit] {
+form#new_grade.new_grade input[type=submit], form.edit_grade input[type=submit]{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
+    width: 150px !important;
+}
+
+
+input[type=submit]:not(.new_grade):not(.edit_grade) {
   width: 25%;
   background-color: #434d75;
   color: white;
@@ -78,6 +87,7 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
+
 
 table { 
   border-collapse:collapse;
@@ -121,8 +131,8 @@ tr.header th{
   border: none;
 }
 
-button.addButton1 a,button.addButton2 a, button.addButton3 a{
-    color:#FFFFFF;
+button.addButton1 a, button.addButton2 a, button.addButton3 a{
+    color:#000000;
 } 
 
 tr:nth-child(even) {
