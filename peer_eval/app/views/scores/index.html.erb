@@ -1,6 +1,16 @@
 
 <%= stylesheet_link_tag "scores" %>
-<h1 class="title">Scores</h1>
+<meta name="turbolinks-cache-control" content="no-cache">
+<% flash.each do |type, msg| %>
+  <h1 class="title">Scores</h1>
+  <div>
+    <%if type =="errors"%>
+      <b style="color:Red;"><%= msg %></b>
+    <% else %>
+      <b style="color:green;"><%= msg %></b>
+    <% end %>
+  </div>
+<%end %>
 <% @groups.each do |group| %>
   <button type="button" class="collapsible"><%= group.name %></button>
   <div class = "content">
@@ -13,8 +23,8 @@
             <% student = Student.find_by(id: member.student_id)
                review = Review.find_by(student_id: student.id, project_id: project.id)%>
             <button type="button" class = "collapsible"><%="#{student.fname} #{student.lname}" %></button>
+            <div class = "content">
             <% if(review != nil) %>
-              <div class = "content">
                   <p>Average rating by group: <%=average_score(project.id, student.id) %>
                   <% scores= Score.where(review_id: review.id) %>
                   <%scores.each do |score| %>
@@ -22,13 +32,27 @@
                   <% end %>
                    <br> <%="Comment: #{review.comment}" %>
                   </p>
-              </div>
             <% else %>
-              <div class="content" >
                 <p> Average rating by group: <%=average_score(project.id, student.id) %>
                   <br> No review submitted.</p>
-              </div >
             <%end %>
+              <% grade = Grade.find_by(student_id: student.id, project_id: project.id)
+                 display = "initial"%>
+              <% if(grade != nil)
+                   projectGrade = grade.projectGrade
+                   else
+                     projectGrade = ""
+                 end %>
+                <p><%= "Grade: #{projectGrade}" %> </p>
+            <div>
+              <%= form_for setup_grade(student, project) do |f| %>
+                <%= f.text_field :projectGrade %>
+                <%= f.hidden_field :project_id, value: project.id %>
+                <%= f.hidden_field :student_id, value: student.id %>
+                <%= f.submit %>
+              <%end %>
+            </div>
+            </div>
           <% end %>
         </div>
       <% end %>
@@ -39,22 +63,24 @@
 
 
 <script>
+document.addEventListener("turbolinks:load", function() {
     let coll = document.getElementsByClassName("collapsible");
-let i;
+    let i;
 
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        let content = this.nextElementSibling;
-        if (content.className == "content"){
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            let content = this.nextElementSibling;
+            if (content.className == "content") {
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
             }
-        }
-    });
-}
+        });
+    }
+})
 </script>
 <!--<p id="notice"><%#= notice %></p>-->
 

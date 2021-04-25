@@ -12,4 +12,13 @@ module ScoresHelper
     end
     return sum/count
   end
+
+  def setup_grade(student, project)
+    grade = Grade.find_by(student_id: student.id, project_id: project.id)
+    if grade == nil
+      Grade.new(params[:grade])
+    else
+      grade
+    end
+  end
 end
