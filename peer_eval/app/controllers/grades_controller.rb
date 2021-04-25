@@ -33,14 +33,12 @@ class GradesController < ApplicationController
 
   # PATCH/PUT /grades/1 or /grades/1.json
   def update
-    respond_to do |format|
-      if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: "Grade was successfully updated." }
-        format.json { render :show, status: :ok, location: @grade }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
-      end
+    if @grade.save
+      flash[:success] = "Grade was successfully updated"
+      redirect_to grades_path
+    else
+      flash[:errors] = @grade.errors.full_messages.join(' ')
+      redirect_to grades_path
     end
   end
 
