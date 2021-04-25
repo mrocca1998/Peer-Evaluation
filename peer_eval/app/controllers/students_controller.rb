@@ -4,6 +4,9 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     @students = Student.all
+    unless current_student.try(:isAdmin?)
+      render(:file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false)
+    end
   end
 
   # GET /students/1 or /students/1.json

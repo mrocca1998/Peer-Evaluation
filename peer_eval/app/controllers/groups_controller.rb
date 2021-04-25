@@ -4,6 +4,9 @@ class GroupsController < ApplicationController
   # GET /groups or /groups.json
   def index
     @groups = Group.all
+    unless current_student.try(:isAdmin?)
+      render(:file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false)
+    end
   end
 
   # GET /groups/1 or /groups/1.json

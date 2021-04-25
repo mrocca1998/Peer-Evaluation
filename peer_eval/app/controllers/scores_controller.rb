@@ -7,6 +7,9 @@ class ScoresController < ApplicationController
     @students = Student.all
     @groups = Group.all
     @projects = Project.all
+    unless current_student.try(:isAdmin?)
+      render(:file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false)
+    end
   end
 
   # GET /scores/1 or /scores/1.json

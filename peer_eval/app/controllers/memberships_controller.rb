@@ -4,6 +4,9 @@ class MembershipsController < ApplicationController
   # GET /memberships or /memberships.json
   def index
     @memberships = Membership.all
+    unless current_student.try(:isAdmin?)
+      render(:file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false)
+    end
   end
 
   # GET /memberships/1 or /memberships/1.json

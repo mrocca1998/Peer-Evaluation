@@ -4,6 +4,9 @@ class AssignmentsController < ApplicationController
   # GET /assignments or /assignments.json
   def index
     @assignments = Assignment.all
+    unless current_student.try(:isAdmin?)
+      render(:file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false)
+    end
   end
 
   # GET /assignments/1 or /assignments/1.json
