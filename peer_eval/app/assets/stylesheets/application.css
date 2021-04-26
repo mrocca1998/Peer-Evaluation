@@ -98,8 +98,8 @@ th {
 }
 
 .field_with_errors {
-  @extend .control-group;
-  @extend .error;
+  /*@extend .control-group;*/
+  /*@extend .error !optional;*/
  }
 
 
