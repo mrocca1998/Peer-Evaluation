@@ -10,3 +10,5 @@
 -All users made by an admin are given a default password "default." Upon login for the first time, these users are redirected to the edit profile page. This allows them to provide a new, secure password as well as edit any personal infor such as the name they go by
 
 -fixed bug with duplicate membership and assignment entries as well as failure to cascade these objects when their dependencies are deleted
+
+-Admins can now add/edit grades for students per project
