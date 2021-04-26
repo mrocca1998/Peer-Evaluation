@@ -11,4 +11,8 @@
 
 -fixed bug with duplicate membership and assignment entries as well as failure to cascade these objects when their dependencies are deleted
 
--Admins can now add/edit grades for students per project
+-Admins can now add/edit grades for students per project, and those grades will be displayed in the student view once they are submitted.
+
+-Improved styling to make the application more interesting.
+
+-labeled the inputs for the peer review (added "score" after each name).
