@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
+<h1 class="title">Projects</h1>
 
 <% if @projects.length > 0 %>
-  <table>
+  <table class="infoTable3">
     <thead>
       <tr>
         <th>Title</th>
         <th>Due Date</th>
-        <th colspan="3">Actions</th>
+        <th colspan="3"> </th>
       </tr>
     </thead>
 
@@ -17,9 +17,9 @@
         <tr>
           <td><%= project.title %></td>
           <td><%= project.due.strftime('%d %b %y') %></td>
-          <td><%= link_to 'Details', project %></td>
-          <td><%= link_to 'Edit', edit_project_path(project) %></td>
-          <td><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><button class="infoButton3"><%= link_to 'Details', project %></button></td>
+          <td><button class="infoButton3"><%= link_to 'Edit', edit_project_path(project) %></button></td>
+          <td><button class="infoButton3"><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
         </tr>
       <% end %>
     </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<button class="addButton3"><%= link_to 'New Project', new_project_path %></button>

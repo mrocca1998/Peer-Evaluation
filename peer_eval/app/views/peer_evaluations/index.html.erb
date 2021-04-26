@@ -14,10 +14,11 @@
             <% if assignment.group_id == group.id%>
               <% @projects.each do |project|%>
                 <% if project.id == assignment.project_id%>
-                  <button type="button" class="collapsible"><%= project.title %></button>
+                  <button type="button" class="collapsible scarlet"><%= project.title %></button>
                   <div class = "content">
                     <div>Due Date: <%= project.due.to_date.strftime("%D") %></div>
                     <% review =  Review.find_by(project_id: project.id, student_id: user.id) %>
+                    <% grade = Grade.find_by(student_id: user.id, project_id: project.id)%>
                     <% if review == nil && (project.due.to_date >= Date.today)%>
                         <%= form_for setup_review(user, group) do |f| %>
                           <div>
@@ -36,16 +37,37 @@
                           <%= f.hidden_field :student_id, value: user.id %>
                           <%= f.submit data: { disable_with: false }%>
                         <% end %>
-                    <% elsif review != nil%>
+                    <% elsif review != nil && grade != nil%>
                         <% review.scores.each do |score| %>
                         <% student = Student.find_by(id: score.recipient_id)%>
-                        <b><%= "#{student.fname} #{student.lname}'s score: " %></b><%= score.rating %> <br>
+                        <b><%= "#{student.fname} #{student.lname}'s score: " %></b><%= score.rating %> 
+                        <br>
                       <% end %>
                         Comment: <%= review.comment %>
+                        <% if grade.projectGrade >= 90%>
+                          <p><%="Grade: A (#{grade.projectGrade}%)" %></p>
+                        <% elsif grade.projectGrade >= 80%>
+                          <p><%="Grade: B (#{grade.projectGrade}%)" %></p>
+                        <% elsif grade.projectGrade >= 70%>
+                          <p><%="Grade: C (#{grade.projectGrade}%)" %></p>
+                        <% elsif grade.projectGrade >= 60%>
+                          <p><%="Grade: D (#{grade.projectGrade}%)" %></p>
+                        <% else%>
+                          <p><%="Grade: F (#{grade.projectGrade}%)" %></p>
+                        <% end%>
+                    <% elsif review != nil && grade == nil%>
+                      <% review.scores.each do |score| %>
+                        <% student = Student.find_by(id: score.recipient_id)%>
+                        <b><%= "#{student.fname} #{student.lname}'s score: " %></b><%= score.rating %> 
+                        <br>
+                      <% end %>
+                        Comment: <%= review.comment %>
+                        <p>No grade entered yet</p>
                     <% else%>
                         <b style="color:red;">Peer Review Overdue</b>
                         <br>
                         <i>No Review Submitted</i>
+                        <p><%="Grade: F (0%)" %></p>
                       <% end %>
                   </div>
                 <%end%>

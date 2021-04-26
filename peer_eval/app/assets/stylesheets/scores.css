@@ -1,9 +1,9 @@
 .collapsible {
-    background-color: #777;
+    background-color: #47b39d;
     color: white;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    width: 90%;
     text-align: left;
     outline: none;
     font-size: 15px;
@@ -11,7 +11,7 @@
 }
 
 .scarlet {
-    background-color: #FF2400;
+    background-color: #777;
 }
 .active, .collapsible:hover {
     /*background-color: #555;*/
@@ -19,7 +19,7 @@
 }
 
 .content {
-    padding: 0 18px;
+    padding-left:18px;
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
@@ -36,3 +36,4 @@
 .active:after {
     content: "\2796";
 }
+
