@@ -1,8 +1,12 @@
 # 5g-final-beta
 
 #Instructions to access application
+The application can be accessed through the following link: https://peer-eval-fiveg.herokuapp.com/u/sign_in hosted through heroku. 
+The application can also still be accessed locally following the same process as our initial submission.
+
 
 #Project Extensions:
+- Added web hosting
 
 #Improvements:
 -Made application more secure by removing admin checkbox from sign-in/edit profile pages. Instead one admin is created by seeding the db. A new admin can only be created by another admin from the admin student managing dashboard.
