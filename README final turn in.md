@@ -13,6 +13,8 @@
 
 -Admins can now add/edit grades for students per project, and those grades will be displayed in the student view once they are submitted.
 
+-Added a due date for each project. The peer review form for each student will disappear after the due date, and it will say that the review submission is overdue.
+
 -Improved styling to make the application more interesting.
 
 -labeled the inputs for the peer review (added "score" after each name).
