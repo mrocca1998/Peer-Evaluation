@@ -25,3 +25,11 @@ By using join tables "memberships" and "assignments," we implemented a many to m
 This allows for support of multiple group structures. An admin can assign a student to multiple groups. In the form and editing pages for students, a checklist of all groups exists. Select whichever groups you wish the student to be a member of. 
 
 The many to many relationship between groups and projects allows the admin to create just one entry for a project and assign it to multiple groups. In the project and group forms, there will be a checklist of all existing groups and projects respectively to assign  project(s) to group(s).
+
+Made application more secure by removing admin checkbox from sign-in/edit profile pages. Instead one admin is created by seeding the db. A new admin can only be created by another admin from the admin student managing dashboard.
+
+All users made by an admin are given a default password "default." Upon login for the first time, these users are redirected to the edit profile page. This allows them to provide a new, secure password as well as edit any personal infor such as the name they go by
+
+Admins can now add/edit grades for students per project, and those grades will be displayed in the student view once they are submitted.
+
+Added a due date for each project. The peer review form for each student will disappear after the due date, and it will say that the review submission is overdue.
